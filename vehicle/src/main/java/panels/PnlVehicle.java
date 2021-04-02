@@ -5,12 +5,14 @@
  */
 package panels;
 
+import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -416,6 +418,14 @@ public class PnlVehicle extends javax.swing.JPanel
         add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtStockFocusLost(java.awt.event.FocusEvent evt) {                                   
+        if(txtStock.getText().isEmpty()){
+            txtStock.requestFocus();
+            txtStock.setBorder(new LineBorder(Color.RED, 1));
+            return;
+        }
+        txtStock.setBorder(null);
+    }
     private void rbtnAutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rbtnAutActionPerformed
     {//GEN-HEADEREND:event_rbtnAutActionPerformed
         // TODO add your handling code here:

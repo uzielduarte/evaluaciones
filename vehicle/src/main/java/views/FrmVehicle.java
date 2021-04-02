@@ -8,8 +8,6 @@ package views;
 import controllers.PnlVehicleController;
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 import panels.PnlVehicle;
 
@@ -17,25 +15,19 @@ import panels.PnlVehicle;
  *
  * @author UZIEL
  */
-public class StartFrame extends javax.swing.JFrame
+public class FrmVehicle extends javax.swing.JFrame
 {
     private PnlVehicle pnlVehicle;
     private PnlVehicleController pnlVehicleController;
 
     /**
-     * Creates new form StartFrame
+     * Creates new form FrmVehicle
      */
-    public StartFrame()
+    public FrmVehicle()
     {
         initComponents();
     }
 
-    private void addComponent(JComponent component) {
-        pnlContent.removeAll();
-        pnlContent.add(component, BorderLayout.CENTER);
-        pnlContent.repaint();
-        this.validate();
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,68 +38,66 @@ public class StartFrame extends javax.swing.JFrame
     private void initComponents()
     {
 
-        pnlLeftBottons = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        btnV = new javax.swing.JButton();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
+        btnNew = new javax.swing.JButton();
+        btnView = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        pnlBottom = new javax.swing.JPanel();
         pnlContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlLeftBottons.setLayout(new java.awt.GridLayout(3, 1));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 1));
 
-        jButton1.setText("jButton1");
-        pnlLeftBottons.add(jButton1);
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
+        btnNew.setText("New");
+        btnNew.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton2ActionPerformed(evt);
+                btnNewActionPerformed(evt);
             }
         });
-        pnlLeftBottons.add(jButton2);
+        jPanel1.add(btnNew);
 
-        btnV.setText("vehicle");
-        btnV.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnVActionPerformed(evt);
-            }
-        });
-        pnlLeftBottons.add(btnV);
+        btnView.setText("View");
+        jPanel1.add(btnView);
 
-        getContentPane().add(pnlLeftBottons, java.awt.BorderLayout.LINE_START);
+        jSplitPane1.setLeftComponent(jPanel1);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+        jPanel2.add(pnlBottom, java.awt.BorderLayout.PAGE_START);
 
         pnlContent.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(pnlContent, java.awt.BorderLayout.CENTER);
+        jPanel2.add(pnlContent, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(418, 347));
+        jSplitPane1.setRightComponent(jPanel2);
+
+        getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
+
+        setSize(new java.awt.Dimension(496, 594));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnVActionPerformed
-    {//GEN-HEADEREND:event_btnVActionPerformed
-        // TODO add your handling code here:
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNewActionPerformed
+    {//GEN-HEADEREND:event_btnNewActionPerformed
         try {
             if (pnlVehicle == null) {
                 pnlVehicle = new PnlVehicle();
                 pnlVehicleController = new PnlVehicleController(pnlVehicle);
             }
-            
-            addComponent(pnlVehicle);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(StartFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnVActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        addComponent(pnlVehicle);
+    }//GEN-LAST:event_btnNewActionPerformed
 
+    private void addComponent(JComponent component) {
+        pnlContent.removeAll();
+        pnlContent.add(component, BorderLayout.CENTER);
+        pnlContent.repaint();
+        this.validate();
+    }
     /**
      * @param args the command line arguments
      */
@@ -130,16 +120,16 @@ public class StartFrame extends javax.swing.JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(StartFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(StartFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(StartFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(StartFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -148,16 +138,18 @@ public class StartFrame extends javax.swing.JFrame
         {
             public void run()
             {
-                new StartFrame().setVisible(true);
+                new FrmVehicle().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnV;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnNew;
+    private javax.swing.JButton btnView;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JPanel pnlBottom;
     private javax.swing.JPanel pnlContent;
-    private javax.swing.JPanel pnlLeftBottons;
     // End of variables declaration//GEN-END:variables
 }
