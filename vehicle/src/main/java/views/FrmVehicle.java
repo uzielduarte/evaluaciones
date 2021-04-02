@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import javax.swing.JComponent;
 import panels.PnlVehicle;
+import panels.PnlVehicleTable;
 
 /**
  *
@@ -19,14 +20,14 @@ public class FrmVehicle extends javax.swing.JFrame
 {
     private PnlVehicle pnlVehicle;
     private PnlVehicleController pnlVehicleController;
-
+    private PnlVehicleTable pnlVehicleTable;
     /**
      * Creates new form FrmVehicle
      */
     public FrmVehicle()
     {
         initComponents();
-    }
+    }                                     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,8 +48,14 @@ public class FrmVehicle extends javax.swing.JFrame
         pnlContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(null);
 
-        jPanel1.setLayout(new java.awt.GridLayout(3, 1));
+        jSplitPane1.setDividerLocation(120);
+        jSplitPane1.setDividerSize(10);
+        jSplitPane1.setMinimumSize(new java.awt.Dimension(83, 147));
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(83, 147));
+
+        jPanel1.setLayout(new java.awt.GridLayout(3, 1, 3, 3));
 
         btnNew.setText("New");
         btnNew.addActionListener(new java.awt.event.ActionListener()
@@ -61,13 +68,23 @@ public class FrmVehicle extends javax.swing.JFrame
         jPanel1.add(btnNew);
 
         btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnViewActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnView);
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
+
+        pnlBottom.setBackground(new java.awt.Color(102, 255, 153));
         jPanel2.add(pnlBottom, java.awt.BorderLayout.PAGE_START);
 
+        pnlContent.setBackground(new java.awt.Color(255, 255, 255));
         pnlContent.setLayout(new java.awt.BorderLayout());
         jPanel2.add(pnlContent, java.awt.BorderLayout.CENTER);
 
@@ -75,7 +92,7 @@ public class FrmVehicle extends javax.swing.JFrame
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(496, 594));
+        setSize(new java.awt.Dimension(519, 555));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -98,6 +115,15 @@ public class FrmVehicle extends javax.swing.JFrame
         pnlContent.repaint();
         this.validate();
     }
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnViewActionPerformed
+    {//GEN-HEADEREND:event_btnViewActionPerformed
+        if (pnlVehicleTable == null)
+        {
+            pnlVehicleTable = new PnlVehicleTable();
+        }
+        addComponent(pnlVehicleTable);
+    }//GEN-LAST:event_btnViewActionPerformed
+
     /**
      * @param args the command line arguments
      */

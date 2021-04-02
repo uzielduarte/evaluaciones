@@ -5,14 +5,12 @@
  */
 package panels;
 
-import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 
 /**
  *
@@ -294,6 +292,7 @@ public class PnlVehicle extends javax.swing.JPanel
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel2.add(txtStock, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -407,25 +406,20 @@ public class PnlVehicle extends javax.swing.JPanel
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel2.add(btnBrowse, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel2.add(fmtVin, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtStockFocusLost(java.awt.event.FocusEvent evt) {                                   
-        if(txtStock.getText().isEmpty()){
-            txtStock.requestFocus();
-            txtStock.setBorder(new LineBorder(Color.RED, 1));
-            return;
-        }
-        txtStock.setBorder(null);
-    }
     private void rbtnAutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rbtnAutActionPerformed
     {//GEN-HEADEREND:event_rbtnAutActionPerformed
         // TODO add your handling code here:

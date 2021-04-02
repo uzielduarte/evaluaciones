@@ -58,12 +58,11 @@ public class PnlVehicleController
         jvdao = new JsonVehicleDaoImpl();
         gson = new Gson();
         
-        JsonReader jreader = new JsonReader(
-               new BufferedReader(new InputStreamReader(
-                       getClass().getResourceAsStream("/jsons/vehicleData.json")))
-        );
+        JsonReader jreader = new JsonReader(new BufferedReader(
+        new InputStreamReader(getClass().getResourceAsStream("/jsons/vehicleData.json"))));
         
         Type listType = new TypeToken<ArrayList<VehicleSubModel>>(){}.getType();
+        
         vSubModels = gson.fromJson(jreader, listType);
         
         List<String> makes = vSubModels.stream().map(x -> x.getMake()).collect(Collectors.toList());
@@ -73,18 +72,18 @@ public class PnlVehicleController
         cmbModelMake = new DefaultComboBoxModel(makes.toArray());
         cmbModelModel = new DefaultComboBoxModel(models.toArray());
         cmbModelEColor = new DefaultComboBoxModel(colors.toArray());
-        cmbModelIColor= new DefaultComboBoxModel(colors.toArray());
+        cmbModelIColor = new DefaultComboBoxModel(colors.toArray());
         cmbModelStatus = new DefaultComboBoxModel(status);
         
         pnlVehicle.getCmbMake().setModel(cmbModelMake);
         pnlVehicle.getCmbModel().setModel(cmbModelModel);
         pnlVehicle.getCmbEColor().setModel(cmbModelEColor);
         pnlVehicle.getCmbIColor().setModel(cmbModelIColor);
-        pnlVehicle.getCmbStatus().setModel(cmbModelStatus);
+        pnlVehicle.getCmbStatus().setModel(cmbModelStatus);    
         
-        pnlVehicle.getBtnSave().addActionListener((actionEvent) -> {
-            btnSaveActionListener(actionEvent);
-        });
+        pnlVehicle.getBtnSave().addActionListener(((e) -> {
+            btnSaveActionListener(e);
+        }));
         
         pnlVehicle.getBtnBrowse().addActionListener(((e) -> {
             btnBrowseActionListener(e);
@@ -94,10 +93,10 @@ public class PnlVehicleController
     private void btnSaveActionListener(ActionEvent e)
     {
         int stock, year;
-        String make,model, style, vin, eColor, iColor, miles, engine, image, status;
+        String make, model, style, vin, eColor, iColor, miles, engine, image, status;
         float price;
         Vehicle.Transmission transmission;
-                
+        
         stock = Integer.parseInt(pnlVehicle.getTxtStock().getText());
         year = Integer.parseInt(pnlVehicle.getSpnYear().getModel().getValue().toString());
         make = pnlVehicle.getCmbMake().getSelectedItem().toString();
@@ -108,18 +107,17 @@ public class PnlVehicleController
         iColor = pnlVehicle.getCmbIColor().getSelectedItem().toString();
         miles = pnlVehicle.getSpnMiles().getModel().getValue().toString();
         price = Float.parseFloat(pnlVehicle.getSpnPrice().getModel().getValue().toString());
-        transmission = pnlVehicle.getRbtnAut().isSelected() ? 
-                Vehicle.Transmission.AUTOMATIC : Vehicle.Transmission.MANUAL;
+        transmission = pnlVehicle.getRbtnAut().isSelected()?
+                Vehicle.Transmission.AUTOMATIC:Vehicle.Transmission.MANUAL;
         engine = pnlVehicle.getTxtEngine().getText();
         image = pnlVehicle.getTxtImage().getText();
         status = pnlVehicle.getCmbStatus().getSelectedItem().toString();
         
+        Vehicle vehicle = new Vehicle(stock,year, make, model, style, vin, iColor, iColor, miles, price, transmission, engine, image, status);
         
-        Vehicle v = new Vehicle(stock, year, make, model, style, vin, 
-                eColor, iColor, miles, price, transmission, engine, image, status);
         try {
-            vehicleValidation(v);
-            jvdao.create(v);
+            vehicleValidation(vehicle);
+            jvdao.create(vehicle);
             JOptionPane.showMessageDialog(null, "Vehicle save sucessfully.",
                     "Saved message",JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
@@ -130,6 +128,7 @@ public class PnlVehicleController
             Logger.getLogger(PnlVehicleController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     private void btnBrowseActionListener(ActionEvent e){
         fileChooser = new JFileChooser();
         

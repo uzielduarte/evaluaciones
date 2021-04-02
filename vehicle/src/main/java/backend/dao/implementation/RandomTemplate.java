@@ -13,19 +13,22 @@ import java.io.IOException;
  *
  * @author UZIEL
  */
-public abstract class RandomTemplate {
-
+public abstract class RandomTemplate
+{
     private File fileHead;
     private File fileData;
-    private CustomRandom customRandom;   
+    private CustomRandom customRandom;
 
-    public RandomTemplate(File fileHead, File fileData) {
+    public RandomTemplate(File fileHead, File fileData)
+    {
         this.fileHead = fileHead;
         this.fileData = fileData;
     }
-
-    protected CustomRandom getCustomRandom() throws FileNotFoundException, IOException {
-        if (customRandom == null) {
+    
+    protected CustomRandom getCustomRandom() throws FileNotFoundException, IOException
+    {
+        if(customRandom == null)
+        {
             customRandom = new CustomRandom(fileHead, fileData);
             return customRandom;
         }
@@ -33,7 +36,8 @@ public abstract class RandomTemplate {
         return customRandom;
     }
     
-    protected void close() throws IOException{
+    protected void close() throws IOException
+    {
         customRandom.close();
         customRandom = null;
     }
