@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,8 +9,12 @@ import backend.dao.implementation.JsonVehicleDaoImpl;
 import backend.pojo.Vehicle;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -20,8 +24,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -29,12 +36,15 @@ import javax.swing.table.TableModel;
  */
 public class PnlVehicleTable extends javax.swing.JPanel
 {
+    JTextField txtPalabraClave;
+    TableModel miModelo;
+    JTable miTabla;
 
     public PnlVehicleTable()
     {
-        TableModel miModelo = new ModeloTabla();
+        miModelo = new ModeloTabla();
         setBounds(200, 300, 1200, 400);
-        JTable miTabla = new JTable(miModelo);
+        miTabla = new JTable(miModelo);
         setLayout(new BorderLayout());
         miTabla.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         
@@ -60,6 +70,52 @@ public class PnlVehicleTable extends javax.swing.JPanel
         pnlBotonInferior.add(botonImprimir);
         
         add(pnlBotonInferior, BorderLayout.SOUTH);
+        
+        //creo un panel superior para un text field
+        JPanel pnlSuperior = new JPanel();
+        
+        pnlSuperior.setLayout(new GridBagLayout());
+        //Establesco los Constraints del GridBagLayout pnlSuperior
+        GridBagConstraints gridBadConstraints = new GridBagConstraints();
+        gridBadConstraints.fill = GridBagConstraints.BOTH;
+        gridBadConstraints.weightx = 0.1;
+        gridBadConstraints.insets = new Insets(1, 1, 1, 1);
+        
+        txtPalabraClave = new JTextField();
+        txtPalabraClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPalabraClaveKeyReleased(evt);
+            }
+        });
+        
+        //agrego el JTextField y el GridBadConstraints al panel superior
+        pnlSuperior.add(txtPalabraClave, gridBadConstraints);
+        add(pnlSuperior, BorderLayout.NORTH);
+        
+    }
+    
+    private void filter(String busquedad)
+    {
+        TableRowSorter<ModeloTabla> tr = new TableRowSorter<ModeloTabla>((ModeloTabla) miModelo);
+        miTabla.setRowSorter(tr);
+        
+        tr.setRowFilter(RowFilter.regexFilter(busquedad));
+    }
+    
+    private void txtPalabraClaveKeyReleased(KeyEvent event)
+    {
+        String query = txtPalabraClave.getText();
+        filter(query);
+    }
+    
+    public JTextField getTxtPalabraClave()
+    {
+        return txtPalabraClave;
+    }
+
+    public void setTxtPalabraClave(JTextField txtPalabraClave)
+    {
+        this.txtPalabraClave = txtPalabraClave;
     }
     
 }

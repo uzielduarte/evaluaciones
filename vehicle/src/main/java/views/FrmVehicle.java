@@ -53,6 +53,7 @@ public class FrmVehicle extends javax.swing.JFrame
         jSplitPane1.setDividerLocation(120);
         jSplitPane1.setDividerSize(10);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(83, 147));
+        jSplitPane1.setOneTouchExpandable(true);
         jSplitPane1.setPreferredSize(new java.awt.Dimension(83, 147));
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 1, 3, 3));
