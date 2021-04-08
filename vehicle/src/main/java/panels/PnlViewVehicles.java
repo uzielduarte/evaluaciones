@@ -34,7 +34,8 @@ public class PnlViewVehicles extends javax.swing.JPanel{
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
@@ -67,11 +68,15 @@ public class PnlViewVehicles extends javax.swing.JPanel{
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
         tblViewVehicle.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));

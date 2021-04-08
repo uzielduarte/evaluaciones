@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -81,6 +82,7 @@ public class PnlViewVehicleController {
         tblRowSorter = new TableRowSorter<>(tblViewModel);
 
         pnlViewVehicles.getTblViewVehicle().setModel(tblViewModel);
+        pnlViewVehicles.getTblViewVehicle().setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         pnlViewVehicles.getTblViewVehicle().setRowSorter(tblRowSorter);
     }
 
