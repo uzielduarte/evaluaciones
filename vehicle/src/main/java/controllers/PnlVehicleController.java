@@ -21,6 +21,7 @@ import java.lang.reflect.Type;
 //import java.lang.ProcessBuilder.Redirect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ import panels.PnlVehicle;
  *
  * @author UZIEL
  */
-public class PnlVehicleController
+public class PnlVehicleController extends java.util.Observable
 {
     private PnlVehicle pnlVehicle;
     private JsonVehicleDaoImpl jvdao;
@@ -154,5 +155,11 @@ public class PnlVehicleController
         if(v.getEngine().isBlank() || v.getEngine().isEmpty()){
             throw new Exception("Engine can not be empty or blank.");
         }
+    }
+    
+    private void setNew(){
+        
+        
+        
     }
 }

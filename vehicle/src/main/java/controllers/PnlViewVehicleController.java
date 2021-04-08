@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -27,7 +29,7 @@ import panels.PnlViewVehicles;
  *
  * @author Sistemas-05
  */
-public class PnlViewVehicleController {
+public class PnlViewVehicleController implements Observer{
 
     private PnlViewVehicles pnlViewVehicles;
     private JsonVehicleDaoImpl jsonVehicleDaoImpl;
@@ -97,6 +99,12 @@ public class PnlViewVehicleController {
         });
 
         return data;
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+       
+       
     }
 }
       
