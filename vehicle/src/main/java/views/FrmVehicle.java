@@ -6,11 +6,13 @@
 package views;
 
 import controllers.PnlVehicleController;
+import controllers.PnlViewVehicleController;
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import javax.swing.JComponent;
 import panels.PnlVehicle;
 import panels.PnlVehicleTable;
+import panels.PnlViewVehicles;
 
 /**
  *
@@ -20,7 +22,8 @@ public class FrmVehicle extends javax.swing.JFrame
 {
     private PnlVehicle pnlVehicle;
     private PnlVehicleController pnlVehicleController;
-    private PnlVehicleTable pnlVehicleTable;
+    private PnlViewVehicles pnlViewVehicles;
+    private PnlViewVehicleController pnlViewVehicleController;
     /**
      * Creates new form FrmVehicle
      */
@@ -99,32 +102,40 @@ public class FrmVehicle extends javax.swing.JFrame
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNewActionPerformed
     {//GEN-HEADEREND:event_btnNewActionPerformed
-        try {
-            if (pnlVehicle == null) {
+        try 
+        {
+            if (pnlVehicle == null)
+            {
                 pnlVehicle = new PnlVehicle();
                 pnlVehicleController = new PnlVehicleController(pnlVehicle);
             }
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex)
+        {
         }
 
         addComponent(pnlVehicle);
     }//GEN-LAST:event_btnNewActionPerformed
 
-    private void addComponent(JComponent component) {
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnViewActionPerformed
+    {//GEN-HEADEREND:event_btnViewActionPerformed
+
+        if (pnlViewVehicles == null)
+        {   
+            pnlViewVehicles = new PnlViewVehicles();          
+        }
+        
+        pnlViewVehicleController = new PnlViewVehicleController(pnlViewVehicles);
+        
+        addComponent(pnlViewVehicles);
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void addComponent(JComponent component)
+    {
         pnlContent.removeAll();
         pnlContent.add(component, BorderLayout.CENTER);
         pnlContent.repaint();
         this.validate();
     }
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnViewActionPerformed
-    {//GEN-HEADEREND:event_btnViewActionPerformed
-        if (pnlVehicleTable == null)
-        {
-            pnlVehicleTable = new PnlVehicleTable();
-        }
-        addComponent(pnlVehicleTable);
-    }//GEN-LAST:event_btnViewActionPerformed
-
     /**
      * @param args the command line arguments
      */
