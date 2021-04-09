@@ -33,7 +33,8 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         pnlContent = new javax.swing.JPanel();
         PnlBotones = new javax.swing.JPanel();
@@ -47,6 +48,7 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Vehicles");
 
+        pnlContent.setBackground(new java.awt.Color(255, 255, 255));
         pnlContent.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlContent.setLayout(new java.awt.BorderLayout());
         pnlViewVehicles = new PnlViewVehicles();
@@ -56,19 +58,30 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
         getContentPane().add(pnlContent, java.awt.BorderLayout.CENTER);
 
         btnNew.setText("New");
-        btnNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnNew.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnNewActionPerformed(evt);
             }
         });
         PnlBotones.add(btnNew);
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         PnlBotones.add(btnUpdate);
 
         btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDelete.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDeleteActionPerformed(evt);
             }
         });
@@ -87,6 +100,13 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
         dlgVehicle = new DlgVehicle(null,true);
         dlgVehicle.setVisible(true);
     }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUpdateActionPerformed
+    {//GEN-HEADEREND:event_btnUpdateActionPerformed
+        DlgVehicle dlgVehicle = new DlgVehicle(null, true);
+        dlgVehicle.setPnlViewVehicleReference(pnlViewVehicles);
+        dlgVehicle.setVisible(true);
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

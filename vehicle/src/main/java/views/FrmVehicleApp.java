@@ -27,7 +27,8 @@ public class FrmVehicleApp extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         dtpContent = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -43,11 +44,11 @@ public class FrmVehicleApp extends javax.swing.JFrame {
         dtpContent.setLayout(dtpContentLayout);
         dtpContentLayout.setHorizontalGroup(
             dtpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
         dtpContentLayout.setVerticalGroup(
             dtpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 417, Short.MAX_VALUE)
         );
 
         getContentPane().add(dtpContent, java.awt.BorderLayout.CENTER);
@@ -57,8 +58,10 @@ public class FrmVehicleApp extends javax.swing.JFrame {
         jMenu1.setText("Opciones");
 
         jMenuItem1.setText("Vehicles");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuItem1ActionPerformed(evt);
             }
         });
@@ -71,7 +74,7 @@ public class FrmVehicleApp extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(416, 339));
+        setSize(new java.awt.Dimension(627, 490));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
