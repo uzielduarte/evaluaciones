@@ -72,13 +72,59 @@ public class JsonVehicleDaoImpl extends RandomTemplate implements VehicleDao
     @Override
     public int update(Vehicle t) throws IOException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getCustomRandom().getRafH().seek(0);
+        int n = getCustomRandom().getRafH().readInt();
+        
+        for(int i = 0; i < n; i++)
+        {
+            long posH = 8 + (i * 8);
+            getCustomRandom().getRafH().seek(posH);
+            
+            int id = getCustomRandom().getRafH().readInt();
+            
+            if(id <= 0)
+                continue;
+            
+            //System.out.println(id + " " + t.getId());
+            
+            if(id == t.getId())
+            {
+                long posD = (id - 1) * SIZE + 4;
+                getCustomRandom().getRafD().seek(posD);
+                getCustomRandom().getRafD().writeUTF(gson.toJson(t));//Vehicle json
+                return 0;
+            }
+        }
+        
+        return -1;
     }
-
+    
     @Override
     public boolean delete(Vehicle t) throws IOException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getCustomRandom().getRafH().seek(0);
+        int n = getCustomRandom().getRafH().readInt();
+        
+        for(int i = 0; i < n; i++)
+        {
+            long posH = 8 + (i * 8);
+            getCustomRandom().getRafH().seek(posH);
+            
+            int id = getCustomRandom().getRafH().readInt();
+            
+            if(id <= 0)
+                continue;
+            
+            //System.out.println(id + " " + t.getId());
+            
+            if(id == t.getId())
+            {
+                getCustomRandom().getRafH().seek(posH);
+                getCustomRandom().getRafH().writeInt(-1);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -100,10 +146,15 @@ public class JsonVehicleDaoImpl extends RandomTemplate implements VehicleDao
             if(id <= 0)
                 continue;
             
-            long posD = (id - 1) * SIZE + 4;
+            long posD = (id - 1) * SIZE;
             getCustomRandom().getRafD().seek(posD);
             
+            int vehicleId = getCustomRandom().getRafD().readInt();
+            
             vehicle = gson.fromJson(getCustomRandom().getRafD().readUTF(), Vehicle.class);
+            
+            vehicle.setId(vehicleId);
+            //System.out.println(vehicle.getId());
             
             vehicles.add(vehicle);
         }

@@ -97,10 +97,15 @@ public class PnlViewVehicleController implements Observer{
         {
             data[i] = vehicles.get(i).asArray();
         });
-
+        
         return data;
     }
 
+    public List<Vehicle> getVehicles()
+    {
+        return vehicles;
+    }
+    
     @Override
     public void update(Observable o, Object o1) {
        

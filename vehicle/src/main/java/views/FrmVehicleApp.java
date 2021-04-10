@@ -44,11 +44,11 @@ public class FrmVehicleApp extends javax.swing.JFrame {
         dtpContent.setLayout(dtpContentLayout);
         dtpContentLayout.setHorizontalGroup(
             dtpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGap(0, 702, Short.MAX_VALUE)
         );
         dtpContentLayout.setVerticalGroup(
             dtpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 417, Short.MAX_VALUE)
+            .addGap(0, 509, Short.MAX_VALUE)
         );
 
         getContentPane().add(dtpContent, java.awt.BorderLayout.CENTER);
@@ -74,7 +74,7 @@ public class FrmVehicleApp extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(627, 490));
+        setSize(new java.awt.Dimension(720, 582));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

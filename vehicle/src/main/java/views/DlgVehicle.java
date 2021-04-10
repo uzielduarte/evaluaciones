@@ -5,8 +5,9 @@
  */
 package views;
 
-import backend.pojo.Vehicle;
 import controllers.PnlVehicleController;
+import controllers.PnlViewVehicleController;
+import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import panels.PnlVehicle;
 import panels.PnlViewVehicles;
@@ -20,7 +21,8 @@ public class DlgVehicle extends javax.swing.JDialog {
     private PnlVehicle pnlVehicle;
     private PnlVehicleController pnlVehicleController;
     
-    PnlViewVehicles pnlViewVehicle;
+    PnlViewVehicles pnlViewVehicle = null;
+    PnlViewVehicleController pnlViewVehicleController = null;
     
     /**
      * Creates new form DlgVehicle
@@ -63,11 +65,13 @@ public class DlgVehicle extends javax.swing.JDialog {
 
         }
 
-        pnlContent.add(pnlVehicle);
+        pnlVehicleController.setIsNew(true);
+        pnlContent.add(pnlVehicle, BorderLayout.CENTER);
 
         getContentPane().add(pnlContent, java.awt.BorderLayout.CENTER);
 
-        pack();
+        setSize(new java.awt.Dimension(551, 521));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowOpened
@@ -80,20 +84,27 @@ public class DlgVehicle extends javax.swing.JDialog {
         
     }//GEN-LAST:event_formWindowClosing
 
-    public void setPnlViewVehicleReference(PnlViewVehicles pnlViewVehicles)
+    public void setPnlViewVehicleReference(PnlViewVehicles pnlViewVehicles, PnlViewVehicleController pnlViewVehicleController)
     {
         this.pnlViewVehicle = pnlViewVehicles;
+        this.pnlViewVehicleController = pnlViewVehicleController;
+        
+        if(pnlViewVehicle == null)
+            return;
     }
     public void bindingDataToComponents() {
+        if(pnlViewVehicle == null)
+            return;
         int row = pnlViewVehicle.getTblViewVehicle().getSelectedRow();
         bindingDataToComponents(row);
     }
     
+    /*public void setSelectedRow(int row) {
+        pnlViewVehicle.getTblViewVehicle().getSelectionModel().setSelectionInterval(row, row);
+    }*/
+    
     public void bindingDataToComponents(int row) {
-        if (row < 0) {
-            return;
-        }
-        
+
         pnlVehicle.getTxtStock().setText(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 0).toString().trim());
         pnlVehicle.getSpnYear().setValue(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 1));
         pnlVehicle.getCmbMake().setSelectedItem(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 2).toString().trim());
@@ -102,8 +113,13 @@ public class DlgVehicle extends javax.swing.JDialog {
         pnlVehicle.getFmtVin().setText(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 5).toString().trim());
         pnlVehicle.getCmbEColor().setSelectedItem(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 6).toString().trim());
         pnlVehicle.getCmbIColor().setSelectedItem(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 7).toString().trim());
+        //Integer.parseInt(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 8).toString())
+        Integer miles = Integer.parseInt(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 8).toString());
+        Double price = Double.parseDouble(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 9).toString());
+        pnlVehicle.getSpnMiles().getModel().setValue(miles);
+        pnlVehicle.getSpnPrice().getModel().setValue(price);
         
-        if(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 9).toString().trim() == "AUTOMATIC")
+        if(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 10).toString() == "AUTOMATIC")
             pnlVehicle.getBtngTrans().setSelected(pnlVehicle.getRbtnAut().getModel(), true);
         else
             pnlVehicle.getBtngTrans().setSelected(pnlVehicle.getRbtnMan().getModel(), true);
@@ -111,9 +127,37 @@ public class DlgVehicle extends javax.swing.JDialog {
         pnlVehicle.getTxtImage().setText(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 12).toString().trim());
         pnlVehicle.getCmbStatus().setSelectedItem(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 13).toString().trim());
         
-        pnlVehicle.getSpnMiles().setValue(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 8));
-        pnlVehicle.getSpnPrice().setValue(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 9));
-        
+        int vehicleId = pnlViewVehicleController.getVehicles().get(row).getId();
+
+        pnlVehicleController.setVehicleIdToEdit(vehicleId);
+        pnlVehicleController.setIsUpdate(true);
+    }
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(DlgGestionDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DlgGestionDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DlgGestionDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DlgGestionDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 DlgVehicle dialog = new DlgVehicle(new javax.swing.JFrame(), true);
@@ -127,7 +171,6 @@ public class DlgVehicle extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnlContent;
     // End of variables declaration//GEN-END:variables

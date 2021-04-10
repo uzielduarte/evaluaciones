@@ -47,6 +47,27 @@ public class PnlVehicleController extends java.util.Observable
     private DefaultComboBoxModel cmbModelStatus;
     private String status[] = new String[]{"Active","Mantainance","Not available"};
     private JFileChooser fileChooser;
+    
+    private boolean isNew = false;
+    private boolean isUpdate = false;
+    private int vehicleIdToEdit;
+
+    public void setVehicleIdToEdit(int vehicleIdToEdit)
+    {
+        this.vehicleIdToEdit = vehicleIdToEdit;
+    }
+
+    public void setIsNew(boolean isNew)
+    {
+        this.isNew = isNew;
+        isUpdate = false;
+    }
+
+    public void setIsUpdate(boolean isUpdate)
+    {
+        this.isUpdate = isUpdate;
+        isNew = false;
+    }
 
     public PnlVehicleController(PnlVehicle pnlVehicle) throws FileNotFoundException
     {
@@ -114,13 +135,26 @@ public class PnlVehicleController extends java.util.Observable
         image = pnlVehicle.getTxtImage().getText();
         status = pnlVehicle.getCmbStatus().getSelectedItem().toString();
         
-        Vehicle vehicle = new Vehicle(stock,year, make, model, style, vin, iColor, iColor, miles, price, transmission, engine, image, status);
+        Vehicle vehicle = new Vehicle(stock,year, make, model, style, vin, eColor, iColor, miles, price, transmission, engine, image, status);
         
         try {
             vehicleValidation(vehicle);
-            jvdao.create(vehicle);
-            JOptionPane.showMessageDialog(null, "Vehicle save sucessfully.",
-                    "Saved message",JOptionPane.INFORMATION_MESSAGE);
+            
+            if(isNew)
+            {
+                jvdao.create(vehicle);
+                JOptionPane.showMessageDialog(null, "Vehicle saved sucessfully.",
+                "Saved message",JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            if(isUpdate)
+            {
+                vehicle.setId(vehicleIdToEdit);
+                jvdao.update(vehicle);
+            JOptionPane.showMessageDialog(null, "Vehicle updated sucessfully.",
+                    "Updating message",JOptionPane.INFORMATION_MESSAGE);
+            }
+            
         } catch (IOException ex) {
             Logger.getLogger(PnlVehicleController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

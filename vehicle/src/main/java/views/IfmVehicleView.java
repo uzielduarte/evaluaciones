@@ -5,8 +5,17 @@
  */
 package views;
 
+import backend.dao.implementation.JsonVehicleDaoImpl;
+import backend.pojo.Vehicle;
+import controllers.PnlVehicleController;
 import controllers.PnlViewVehicleController;
 import java.awt.BorderLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import panels.PnlVehicle;
 import panels.PnlViewVehicles;
 
 /**
@@ -57,6 +66,8 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
         pnlContent.add(pnlViewVehicles, BorderLayout.CENTER);
         getContentPane().add(pnlContent, java.awt.BorderLayout.CENTER);
 
+        PnlBotones.setBackground(new java.awt.Color(204, 204, 204));
+
         btnNew.setText("New");
         btnNew.addActionListener(new java.awt.event.ActionListener()
         {
@@ -93,7 +104,37 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        if(pnlViewVehicles.getTblViewVehicle().getSelectedRow() == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila si desea eliminarla.",
+                    "Delete message",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this row?","Delete", JOptionPane.YES_NO_OPTION);
+        
+        if(option == JOptionPane.NO_OPTION)
+            return;
+        
+        int row = pnlViewVehicles.getTblViewVehicle().getSelectedRow();
+        int vehicleId = pnlViewVehicleController.getVehicles().get(row).getId();
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setId(vehicleId);
+        JsonVehicleDaoImpl jsonVehicleDaoImpl;
+        try
+        {
+            jsonVehicleDaoImpl = new JsonVehicleDaoImpl();
+            jsonVehicleDaoImpl.delete(vehicle);
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(IfmVehicleView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(IfmVehicleView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "The row was sucessfully deleted",
+                "Delete message",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
@@ -103,8 +144,14 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUpdateActionPerformed
     {//GEN-HEADEREND:event_btnUpdateActionPerformed
+        if(pnlViewVehicles.getTblViewVehicle().getSelectedRow() == -1)
+        { 
+            JOptionPane.showMessageDialog(null, "Seleccione una fila si desea editar sus campos.",
+                    "Updating message",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         DlgVehicle dlgVehicle = new DlgVehicle(null, true);
-        dlgVehicle.setPnlViewVehicleReference(pnlViewVehicles);
+        dlgVehicle.setPnlViewVehicleReference(pnlViewVehicles, pnlViewVehicleController);
         dlgVehicle.setVisible(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 

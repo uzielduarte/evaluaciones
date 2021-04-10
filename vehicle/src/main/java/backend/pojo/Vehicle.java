@@ -27,6 +27,18 @@ public class Vehicle
     private String image; //100
     private String status; // 20
     
+    private int id;
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }  
+    
     public enum Transmission
     {
         AUTOMATIC, MANUAL
@@ -224,5 +236,11 @@ public class Vehicle
         obj[13] = status;
         
         return obj;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Vehicle{" + "stockNumber=" + stockNumber + ", year=" + year + ", make=" + make + ", model=" + model + ", style=" + style + ", vin=" + vin + ", exteriorColor=" + exteriorColor + ", interiorColor=" + interiorColor + ", miles=" + miles + ", price=" + price + ", transmission=" + transmission + ", engine=" + engine + ", image=" + image + ", status=" + status + ", id=" + id + '}';
     }
 }
