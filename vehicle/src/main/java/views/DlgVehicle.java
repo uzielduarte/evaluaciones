@@ -141,9 +141,10 @@ public class DlgVehicle extends javax.swing.JDialog {
         pnlVehicle.getTxtImage().setText(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 12).toString().trim());
         pnlVehicle.getCmbStatus().setSelectedItem(pnlViewVehicle.getTblViewVehicle().getValueAt(row, 13).toString().trim());
         
-        int vehicleId = pnlViewVehicleController.getVehicles().get(row).getId();
+        //int vehicleId = pnlViewVehicleController.getVehicles().get(row).getId();
+        int id = (int) pnlViewVehicle.getTblViewVehicle().getValueAt(pnlViewVehicle.getTblViewVehicle().getSelectedRow(), 14);
 
-        pnlVehicleController.setVehicleIdToEdit(vehicleId);
+        pnlVehicleController.setVehicleIdToEdit(id);
         pnlVehicleController.setIsUpdate(true);
     }
 

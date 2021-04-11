@@ -35,7 +35,7 @@ public class PnlViewVehicleController {
     private VehicleTableModel tblViewModel;
     private List<Vehicle> vehicles;
     private String[] HEADERS = new String[]{"StockNumber", "Year", "Make", "Model", "Style",
-        "Vin", "Exterior color", "Interior color", "Miles", "Price", "Transmission", "Engine", "Image", "Status"};
+        "Vin", "Exterior color", "Interior color", "Miles", "Price", "Transmission", "Engine", "Image", "Status", "Id"};
     private TableRowSorter<VehicleTableModel> tblRowSorter;
 
     public PnlViewVehicleController(PnlViewVehicles pnlViewVehicles)

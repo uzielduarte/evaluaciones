@@ -119,7 +119,7 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
             return;
         
         int row = pnlViewVehicles.getTblViewVehicle().getSelectedRow();
-        int vehicleId = pnlViewVehicleController.getVehicles().get(row).getId();
+        int vehicleId = (int) pnlViewVehicles.getTblViewVehicle().getValueAt(pnlViewVehicles.getTblViewVehicle().getSelectedRow(), 14);
 
         Vehicle vehicle = new Vehicle();
         vehicle.setId(vehicleId);

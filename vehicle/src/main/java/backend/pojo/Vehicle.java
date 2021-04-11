@@ -218,7 +218,7 @@ public class Vehicle
     
     public Object[] asArray()
     {
-        Object[] obj = new Object[14];
+        Object[] obj = new Object[15];
         
         obj[0] = stockNumber;
         obj[1] = year;
@@ -234,6 +234,7 @@ public class Vehicle
         obj[11] = engine;
         obj[12] = image;
         obj[13] = status;
+        obj[14] = id;
         
         return obj;
     }
