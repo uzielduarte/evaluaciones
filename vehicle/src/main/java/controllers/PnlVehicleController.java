@@ -47,11 +47,11 @@ public class PnlVehicleController extends java.util.Observable
     private DefaultComboBoxModel cmbModelStatus;
     private String status[] = new String[]{"Active","Mantainance","Not available"};
     private JFileChooser fileChooser;
-    
     private boolean isNew = false;
     private boolean isUpdate = false;
     private int vehicleIdToEdit;
-
+    private Vehicle vehicle;
+    
     public void setVehicleIdToEdit(int vehicleIdToEdit)
     {
         this.vehicleIdToEdit = vehicleIdToEdit;
@@ -135,22 +135,28 @@ public class PnlVehicleController extends java.util.Observable
         image = pnlVehicle.getTxtImage().getText();
         status = pnlVehicle.getCmbStatus().getSelectedItem().toString();
         
-        Vehicle vehicle = new Vehicle(stock,year, make, model, style, vin, eColor, iColor, miles, price, transmission, engine, image, status);
+        vehicle = new Vehicle(stock,year, make, model, style, vin, eColor, iColor, miles, price, transmission, engine, image, status);
         
         try {
             vehicleValidation(vehicle);
             
             if(isNew)
-            {
+            {   
                 jvdao.create(vehicle);
+                setChanged();
+                notifyObservers(vehicle);
                 JOptionPane.showMessageDialog(null, "Vehicle saved sucessfully.",
                 "Saved message",JOptionPane.INFORMATION_MESSAGE);
+                
             }
             
             if(isUpdate)
             {
                 vehicle.setId(vehicleIdToEdit);
                 jvdao.update(vehicle);
+                setChanged();
+                notifyObservers(isUpdate);
+             
             JOptionPane.showMessageDialog(null, "Vehicle updated sucessfully.",
                     "Updating message",JOptionPane.INFORMATION_MESSAGE);
             }
@@ -191,9 +197,4 @@ public class PnlVehicleController extends java.util.Observable
         }
     }
     
-    private void setNew(){
-        
-        
-        
-    }
 }

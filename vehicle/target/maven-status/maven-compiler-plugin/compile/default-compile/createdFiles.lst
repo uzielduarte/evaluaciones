@@ -1,7 +1,9 @@
 controllers\PnlVehicleController.class
 backend\pojo\VehicleSubModel.class
+views\DlgVehicle$2.class
 backend\dao\implementation\CustomRandom.class
 panels\PnlVehicleTable.class
+controllers\PnlViewVehicleController$3.class
 backend\pojo\Vehicle.class
 views\FrmVehicle$2.class
 controllers\PnlVehicleController$1.class
@@ -11,6 +13,9 @@ panels\PnlVehicleTable$1.class
 controllers\PnlViewVehicleController.class
 panels\PnlVehicle$1.class
 controllers\PnlViewVehicleController$1.class
+controllers\PnlViewVehicleController$2.class
+models\VehicleTableModel.class
+views\DlgVehicle$2$1.class
 views\FrmVehicle$1.class
 backend\dao\implementation\JsonVehicleDaoImpl.class
 backend\dao\implementation\RandomTemplate.class
@@ -19,5 +24,6 @@ panels\PnlVehicle.class
 panels\PnlVehicleTable$2.class
 panels\PnlViewVehicles.class
 backend\dao\VehicleDao.class
+views\IfmVehicleView$3.class
 backend\dao\Dao.class
 views\FrmVehicle.class

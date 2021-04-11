@@ -9,6 +9,7 @@ import controllers.PnlVehicleController;
 import controllers.PnlViewVehicleController;
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
+import java.util.Observer;
 import panels.PnlVehicle;
 import panels.PnlViewVehicles;
 
@@ -31,7 +32,20 @@ public class DlgVehicle extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public void addObserver(Observer ob){
+        pnlVehicleController.addObserver(ob);
+    }
 
+    public PnlViewVehicles getPnlViewVehicle() {
+        return pnlViewVehicle;
+    }
+
+    public PnlViewVehicleController getPnlViewVehicleController() {
+        return pnlViewVehicleController;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,13 +161,13 @@ public class DlgVehicle extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DlgGestionDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DlgGestionDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DlgGestionDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DlgGestionDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgVehicle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

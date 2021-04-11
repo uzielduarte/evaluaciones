@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.VehicleTableModel;
 import panels.PnlVehicle;
 import panels.PnlViewVehicles;
 
@@ -126,6 +128,10 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
         {
             jsonVehicleDaoImpl = new JsonVehicleDaoImpl();
             jsonVehicleDaoImpl.delete(vehicle);
+            
+            VehicleTableModel dtm =  (VehicleTableModel) pnlViewVehicles.getTblViewVehicle().getModel(); 
+            dtm.removeRow(row);
+            
         } catch (FileNotFoundException ex)
         {
             Logger.getLogger(IfmVehicleView.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,12 +139,17 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
         {
             Logger.getLogger(IfmVehicleView.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
+        
         JOptionPane.showMessageDialog(null, "The row was sucessfully deleted",
                 "Delete message",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         dlgVehicle = new DlgVehicle(null,true);
+        dlgVehicle.addObserver(pnlViewVehicleController.getTblViewModel());
         dlgVehicle.setVisible(true);
     }//GEN-LAST:event_btnNewActionPerformed
 
@@ -151,7 +162,9 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
             return;
         }
         DlgVehicle dlgVehicle = new DlgVehicle(null, true);
+        //dlgVehicle.addObserver(pnlViewVehicleController.getTblViewModel());  //Pendiente 
         dlgVehicle.setPnlViewVehicleReference(pnlViewVehicles, pnlViewVehicleController);
+        
         dlgVehicle.setVisible(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 

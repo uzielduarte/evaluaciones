@@ -12,8 +12,6 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -22,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import models.VehicleTableModel;
 import panels.PnlViewVehicles;
 
 
@@ -29,20 +28,24 @@ import panels.PnlViewVehicles;
  *
  * @author Sistemas-05
  */
-public class PnlViewVehicleController implements Observer{
+public class PnlViewVehicleController {
 
     private PnlViewVehicles pnlViewVehicles;
     private JsonVehicleDaoImpl jsonVehicleDaoImpl;
-    private DefaultTableModel tblViewModel;
+    private VehicleTableModel tblViewModel;
     private List<Vehicle> vehicles;
     private String[] HEADERS = new String[]{"StockNumber", "Year", "Make", "Model", "Style",
         "Vin", "Exterior color", "Interior color", "Miles", "Price", "Transmission", "Engine", "Image", "Status"};
-    private TableRowSorter<DefaultTableModel> tblRowSorter;
+    private TableRowSorter<VehicleTableModel> tblRowSorter;
 
     public PnlViewVehicleController(PnlViewVehicles pnlViewVehicles)
     {
         this.pnlViewVehicles = pnlViewVehicles;
         initComponent();
+    }
+    
+    public VehicleTableModel getTblViewModel() {
+        return tblViewModel;
     }
 
     private void initComponent() 
@@ -73,16 +76,36 @@ public class PnlViewVehicleController implements Observer{
 
     private void txtFinderKeyTyped(KeyEvent e)
     {
-        RowFilter<DefaultTableModel, Object> rf = null;
-        rf = RowFilter.regexFilter(pnlViewVehicles.getTxtFinder().getText(), 0, 1, 2, 3, 4, 5, 6, 7, 8);
+        RowFilter<VehicleTableModel, Object> rf = null;
+        rf = RowFilter.regexFilter(pnlViewVehicles.getTxtFinder().getText(), 0, 1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12,13);
         tblRowSorter.setRowFilter(rf);
     }
 
     private void loadTable() throws IOException
-    {
-        tblViewModel = new DefaultTableModel(getData(), HEADERS);
-        tblRowSorter = new TableRowSorter<>(tblViewModel);
-
+    {   
+        vehicles = jsonVehicleDaoImpl.getAll().stream().collect(Collectors.toList());
+        tblViewModel = new VehicleTableModel(vehicles, HEADERS)
+        {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(column == 13) return true;
+                else return false;
+            }
+            
+        };
+        
+        tblRowSorter = new TableRowSorter<VehicleTableModel>(tblViewModel)
+        {
+            @Override
+            public boolean isSortable(int column) {
+               if(column < 0)
+            return true;
+            else 
+            return false;
+            }
+            
+        };
+            
         pnlViewVehicles.getTblViewVehicle().setModel(tblViewModel);
         pnlViewVehicles.getTblViewVehicle().setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         pnlViewVehicles.getTblViewVehicle().setRowSorter(tblRowSorter);
@@ -106,10 +129,6 @@ public class PnlViewVehicleController implements Observer{
         return vehicles;
     }
     
-    @Override
-    public void update(Observable o, Object o1) {
-       
-       
-    }
+   
 }
       
