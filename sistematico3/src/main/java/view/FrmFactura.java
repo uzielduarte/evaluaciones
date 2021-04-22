@@ -5,12 +5,16 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Sistemas-08
  */
 public class FrmFactura extends javax.swing.JFrame {
 
+    private String [] HEADER = new String[]{"Cod. del producto", "Nombre", "Cantidad", "Precio"};
+    float total = 0;
     /**
      * Creates new form FrmFactura
      */
@@ -25,24 +29,25 @@ public class FrmFactura extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         lblIva = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
+        txtTotal = new javax.swing.JTextField();
+        txtIva = new javax.swing.JTextField();
+        txtSubtotal = new javax.swing.JTextField();
+        pnlTable = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProductos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -52,19 +57,6 @@ public class FrmFactura extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         spnCantidad = new javax.swing.JSpinner();
         ftPrecio = new javax.swing.JFormattedTextField();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Factura");
@@ -92,53 +84,83 @@ public class FrmFactura extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jLabel7, gridBagConstraints);
 
-        jTextField1.setEditable(false);
+        txtTotal.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
-        jPanel5.add(jTextField1, gridBagConstraints);
+        jPanel5.add(txtTotal, gridBagConstraints);
 
-        jTextField2.setEditable(false);
+        txtIva.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
-        jPanel5.add(jTextField2, gridBagConstraints);
+        jPanel5.add(txtIva, gridBagConstraints);
 
-        jTextField3.setEditable(false);
+        txtSubtotal.setEditable(false);
+        txtSubtotal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtSubtotalActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
-        jPanel5.add(jTextField3, gridBagConstraints);
+        jPanel5.add(txtSubtotal, gridBagConstraints);
 
         jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        pnlTable.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTable.setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.add(jPanel6, java.awt.BorderLayout.PAGE_START);
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+
+            },
+            new String []
+            {
+                "Cod. de producto", "nombre", "cantidad", "precio"
+            }
+        ));
+        jScrollPane1.setViewportView(tblProductos);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        pnlTable.add(jScrollPane1, gridBagConstraints);
+
+        jPanel1.add(pnlTable, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("Agregar");
-        jPanel3.add(jButton1);
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAgregar);
 
-        jButton2.setText("Eliminar");
-        jPanel3.add(jButton2);
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEliminar);
 
         jPanel2.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
@@ -201,6 +223,44 @@ public class FrmFactura extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAgregarActionPerformed
+    {//GEN-HEADEREND:event_btnAgregarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tblProductos.getModel();
+        
+        Object [] fila = new Object[4];
+        fila[0] = txtCodProducto.getText();
+        fila[1] = txtNombre.getText();
+        fila[2] = spnCantidad.getModel().getValue().toString();
+        fila[3] = ftPrecio.getText();
+        
+        total += ((Float.parseFloat(spnCantidad.getModel().getValue().toString()) * Float.parseFloat(ftPrecio.getText())));
+        txtTotal.setText(total + "");
+        txtIva.setText((total * 0.15) +"");
+        txtSubtotal.setText((total - (total *0.15) + ""));
+        
+        modelo.addRow(fila);
+        tblProductos.setModel(modelo);
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEliminarActionPerformed
+    {//GEN-HEADEREND:event_btnEliminarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tblProductos.getModel();
+        
+        int a = tblProductos.getSelectedRow();
+        if(a < 0)
+            return;
+        total -= ((Float.parseFloat(tblProductos.getValueAt(a, 2).toString()) * Float.parseFloat(tblProductos.getValueAt(a, 3).toString())));
+        txtTotal.setText(total + "");
+        txtIva.setText((total * 0.15) +"");
+        txtSubtotal.setText((total - (total *0.15) + ""));
+        modelo.removeRow(a);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtSubtotalActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtSubtotalActionPerformed
+    {//GEN-HEADEREND:event_txtSubtotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSubtotalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,9 +297,9 @@ public class FrmFactura extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JFormattedTextField ftPrecio;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -251,15 +311,15 @@ public class FrmFactura extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblIva;
+    private javax.swing.JPanel pnlTable;
     private javax.swing.JSpinner spnCantidad;
+    private javax.swing.JTable tblProductos;
     private javax.swing.JTextField txtCodProducto;
+    private javax.swing.JTextField txtIva;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtSubtotal;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
