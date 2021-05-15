@@ -39,8 +39,7 @@ public class FrmVehicle extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
@@ -51,7 +50,6 @@ public class FrmVehicle extends javax.swing.JFrame
         pnlContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(null);
 
         jSplitPane1.setDividerLocation(120);
         jSplitPane1.setDividerSize(10);
@@ -61,21 +59,19 @@ public class FrmVehicle extends javax.swing.JFrame
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 1, 3, 3));
 
+        btnNew.setBackground(new java.awt.Color(255, 51, 51));
         btnNew.setText("New");
-        btnNew.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewActionPerformed(evt);
             }
         });
         jPanel1.add(btnNew);
 
+        btnView.setBackground(new java.awt.Color(255, 0, 0));
         btnView.setText("View");
-        btnView.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewActionPerformed(evt);
             }
         });
