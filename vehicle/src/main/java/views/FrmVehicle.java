@@ -84,7 +84,7 @@ public class FrmVehicle extends javax.swing.JFrame
         pnlBottom.setBackground(new java.awt.Color(102, 255, 153));
         jPanel2.add(pnlBottom, java.awt.BorderLayout.PAGE_START);
 
-        pnlContent.setBackground(new java.awt.Color(255, 255, 255));
+        pnlContent.setBackground(new java.awt.Color(255, 255, 0));
         pnlContent.setLayout(new java.awt.BorderLayout());
         jPanel2.add(pnlContent, java.awt.BorderLayout.CENTER);
 
