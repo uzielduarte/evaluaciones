@@ -57,20 +57,23 @@ public class VehicleTableModel extends AbstractTableModel implements Observer{
     }
     
        public void removeRow(int row) {
-        data.remove(row);
+        this.data.remove(row);
         fireTableDataChanged();
        }
     
 
+    // Se podría actualizar el objeto directamente, pero se opta por eliminar y agregar para simplificar.
     @Override
     public void update(Observable o, Object arg) {
-       /*if(arg.equals(true)){  //Pendiente de solucionar Update 
-           System.out.println("Hi");
-           fireTableDataChanged();
-           arg = false;
-       }*/
-        
-        add((Vehicle) arg);
-        fireTableDataChanged();
+        if (arg instanceof Vehicle) {
+            Vehicle vehicle = (Vehicle) arg;
+
+            data.removeIf(vh -> vh.getId() == vehicle.getId());
+            data.add(vehicle);
+            
+            fireTableDataChanged();
+        } else {
+            System.out.println("El argumento no es de tipo Vehicle");
+        }
     }
 }

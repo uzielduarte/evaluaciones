@@ -155,7 +155,7 @@ public class PnlVehicleController extends java.util.Observable
                 vehicle.setId(vehicleIdToEdit);
                 jvdao.update(vehicle);
                 setChanged();
-                notifyObservers(isUpdate);
+                notifyObservers(vehicle);
              
             JOptionPane.showMessageDialog(null, "Vehicle updated sucessfully.",
                     "Updating message",JOptionPane.INFORMATION_MESSAGE);

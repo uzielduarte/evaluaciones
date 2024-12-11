@@ -162,7 +162,7 @@ public class IfmVehicleView extends javax.swing.JInternalFrame {
             return;
         }
         DlgVehicle dlgVehicle = new DlgVehicle(null, true);
-        //dlgVehicle.addObserver(pnlViewVehicleController.getTblViewModel());  //Pendiente 
+        dlgVehicle.addObserver(pnlViewVehicleController.getTblViewModel());
         dlgVehicle.setPnlViewVehicleReference(pnlViewVehicles, pnlViewVehicleController);
         
         dlgVehicle.setVisible(true);
